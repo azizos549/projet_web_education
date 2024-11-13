@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Bienvenue sur notre site Skill Swap</h2>
+        <img id="pp" src="asseets/logoo.png" alt="logo">
+        <form action="login" method="POST">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input class="styled-input" type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input class="styled-input" type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-btn">Connexion</button>
+            <div class="extra-options">
+                <a href="#">Mot de passe oublié ?</a>
+                <a href="#">Créer un compte</a>
+            </div>
+        </form>
+        
+        <!-- Section des icônes -->
+        <div class="social-icons">
+            <img src="asseets/facebook-svgrepo-com (2).svg" alt="Facebook" class="icon">
+            <img src="asseets/instagram-svgrepo-com.svg" alt="Instagram" class="icon">
+            <img src="asseets/inbox-svgrepo-com (1).svg" alt="Email" class="icon">
+        </div>
+    </div>
+</body>
+</html>
