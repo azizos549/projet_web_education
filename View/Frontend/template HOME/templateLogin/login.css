@@ -12,6 +12,7 @@ body {
     height: 100vh;
     background: linear-gradient(135deg, #4b6cb7, #182848);
     font-family: Arial, sans-serif;
+    margin: 0; /* Supprime les marges par défaut */
 }
 
 /* Login container */
@@ -23,6 +24,11 @@ body {
     border-radius: 12px;
     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
     text-align: center;
+
+    /* Ajouts pour gérer le défilement */
+    max-height: 80vh; /* Limite la hauteur à 80% de la hauteur de la fenêtre */
+    overflow-y: auto; /* Active le défilement vertical si nécessaire */
+    overflow-x: hidden;
 }
 
 h2 {
