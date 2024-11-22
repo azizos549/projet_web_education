@@ -22,9 +22,9 @@
 
 
             <div class="auth-buttons">
-                <form action="templateLogin\login.php"><button > Connexion</a></button>   </form>
+                <form action="login&signUp\login.php"><button > Connexion</a></button>   </form>
                <!--formulaire sign up--> 
-               <form action="templateLogin\SignUp.php"><button > S'inscrire</a></button> </form>
+               <form action="login&signUp\SignUp.php"><button > S'inscrire</a></button> </form>
             </div>
         </nav>
 

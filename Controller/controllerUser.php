@@ -9,14 +9,14 @@ class CoursController {
         $sql = "INSERT INTO utilisateur(Email, MotDePasse, Telephone, Utilisateur, Role) 
                 VALUES (:email, :motdepasse, :telephone, :utilisateur, :role)"; 
 
-        // Connexion à la base de données
+       
         $db = config::getConnexion();
 
         try {
-            // Préparation de la requête SQL
+           
             $query = $db->prepare($sql);
 
-            // Exécution de la requête en utilisant les valeurs de l'objet User
+          
             $query->execute([
                 'email' => $user->getEmail(),
                 'motdepasse' => $user->getMotDePasse(),
@@ -59,13 +59,13 @@ class CoursController {
 
     function updateUser($user, $id)
     {
-        var_dump($user); // Pour déboguer et voir les données
+        var_dump($user); 
         
         try {
-            // Connexion à la base de données
+         
             $db = config::getConnexion();
     
-            // Préparer la requête SQL pour mettre à jour les informations de l'utilisateur
+           
             $query = $db->prepare(
                 'UPDATE Utilisateur SET 
                     Utilisateur = :name,
@@ -76,7 +76,7 @@ class CoursController {
                 WHERE Id = :id'
             );
     
-            // Exécuter la requête en passant les paramètres récupérés de l'objet `$user`
+          
             $query->execute([
                 'id' => $id,
                 'name' => $user->getUtilisateur(),
@@ -87,17 +87,16 @@ class CoursController {
                 'role' => $user->getRole()
             ]);
     
-            // Afficher le nombre de lignes mises à jour
+           
             echo $query->rowCount() . " records UPDATED successfully <br>";
     
         } catch (PDOException $e) {
-            // Gérer les erreurs de la base de données
+        
             echo "Error: " . $e->getMessage();
         }
     }
     public function getUserById($userId) {
-        // Code pour récupérer l'utilisateur à partir de l'ID
-        // Cela pourrait être une requête à la base de données
+    
         $db = new PDO("mysql:host=localhost;dbname=user", 'root', '');
         $query = "SELECT * FROM utilisateur WHERE Id = :userId";
         $stmt = $db->prepare($query);
@@ -105,6 +104,47 @@ class CoursController {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+
+
+    
+    /**/ 
+    public function checkUser($email, $password)
+{
+    $sql = "SELECT * FROM utilisateur WHERE Email = :email";
+
+    $db = config::getConnexion();
+
+    try {
+ 
+        $query = $db->prepare($sql);
+
+        // Exécuter avec l'email fourni
+        $query->execute([
+            'email' => $email
+        ]);
+
+        // Récupérer l'utilisateur
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+
+        // Vérifier si l'utilisateur existe
+        if ($user) {
+            // Vérifier le mot de passe (ajouter `password_verify` si le mot de passe est haché)
+            if ($password === $user['MotDePasse']) {
+                return $user; // Retourner les informations de l'utilisateur
+            } else {
+                return "Mot de passe incorrect.";
+            }
+        } else {
+            return "Aucun utilisateur trouvé avec cet email.";
+        }
+    } catch (Exception $e) {
+        // Gestion des erreurs
+        echo 'Erreur: ' . $e->getMessage();
+    }
+}
+
     
     
     

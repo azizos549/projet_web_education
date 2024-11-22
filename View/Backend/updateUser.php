@@ -1,44 +1,42 @@
 <?php
-// Inclure les fichiers nécessaires
-include_once('../../Controller/controllerUser.php');
-include_once('../../Model/modelUser.php');  // Assurez-vous que la classe User est incluse ici
 
-// Initialiser la variable $user
+include_once('../../Controller/controllerUser.php');
+include_once('../../Model/modelUser.php');  
+
+
 $user = null;
 
-// Vérifier si l'ID de l'utilisateur est passé dans l'URL
+
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
     
-    // Créer un objet du contrôleur UserController
+
     $utilisateursController = new CoursController();
-    
-    // Récupérer les détails de l'utilisateur à partir de l'ID
+
     $user = $utilisateursController->getUserById($userId);
 }
 
-// Vérifier si l'utilisateur a été trouvé
+
 if ($user === null) {
     echo "L'utilisateur demandé n'existe pas.";
     exit();
 }
 
-// Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdepasse'], $_POST['email'], $_POST['phone'], $_POST['role'])) {
-    // Récupérer les données du formulaire
-    $name = $_POST['name']; // Correspond à 'name' dans le formulaire
-    $email = $_POST['email']; // Correspond à 'email' dans le formulaire
-    $motdepasse = $_POST['motdepasse']; // Correspond à 'email' dans le formulaire
-    $phone = $_POST['phone']; // Correspond à 'phone' dans le formulaire
-    $role = $_POST['role']; // Correspond à 'role' dans le formulaire
+  
+    $name = $_POST['name']; 
+    $email = $_POST['email']; 
+    $motdepasse = $_POST['motdepasse']; 
+    $phone = $_POST['phone']; 
+    $role = $_POST['role'];
 
-    // Créer un objet utilisateur (assurez-vous que cette classe est définie dans User.php)
-    $user = new User($name, $email,$motdepasse, $phone, $role); // Constructeur qui prend en paramètre les données
 
-    // Mettre à jour l'utilisateur
-    $utilisateursController->updateUser($user, $userId); // Passer l'objet et l'ID
+    $user = new User($name, $email,$motdepasse, $phone, $role); 
 
-    // Rediriger vers la page du tableau des utilisateurs après la mise à jour
+
+    $utilisateursController->updateUser($user, $userId);
+
+ 
     header('Location: dashboard.php');
     exit();
 }
@@ -91,8 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdep
 
                 <label for="role">Rôle :</label>
                 <select name="role" id="role">
-                    <option value="admin" <?= $user['Role'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
-                    <option value="user" <?= $user['Role'] == 'user' ? 'selected' : ''; ?>>User</option>
+                    <option value="0" <?= $user['Role'] == '0' ? 'selected' : ''; ?>>Admin</option>
+                    <option value="1" <?= $user['Role'] == '1' ? 'selected' : ''; ?>>Utilisateur</option>
                 </select>
 
                 <button type="submit" class="btn-update">Mettre à jour</button>
@@ -101,7 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdep
     </div>
 
     <script>
-        // Function to show the selected section and hide others
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.section-content');
             sections.forEach(section => {

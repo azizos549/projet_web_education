@@ -13,7 +13,9 @@
     
     <div class="user-info">
         <img src="logoo.png" alt="User Profile">
-        <span>bienvenue sur notre site  : username</span>
+       
+        <span>bienvenue sur notre site  : </span>
+        <h1>dashboard</h1>
     </div>
 
      <nav>
